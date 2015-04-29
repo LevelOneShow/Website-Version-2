@@ -2,7 +2,7 @@
 # List of users can be found in users.txt.
 
 # By Nick Pleatsikas - nickcp.com
-# For Level One Show - lvloneshow.com
+# For Volta Network - volta.network
 
 # Email admin@lvloneshow.com to report a bug.
 
@@ -38,7 +38,7 @@ def loop_through(li):
         num_users = (num_users+1)
     return live_now
 
-# output_file : string object -> file
+# output_file : string, object -> file
 # Outputs an array to a file. Overwrites the file if it exists.
 def output_file(file, o):
     with open(file, "w") as output_file:
@@ -47,6 +47,7 @@ def output_file(file, o):
 # online_status : string -> object
 # Checks to see if twitch.tv user is online.
 def online_status(user):
+    # Add in structure for future services like beam.
     url = "https://api.twitch.tv/kraken/streams/" + user
     info = (requests.get(url).json())
     if info.get("stream") == None:
@@ -59,4 +60,8 @@ def online_status(user):
 # -> file
 # Outputs the twitch information for users to a file.
 output_file(output, loop_through(read_file_to_list(user_list)))
-# For debugging purposes: print(loop_through(read_file_to_list(user_list)))
+
+# Debug: -----------------------------------------------------------------------
+
+# Print data output to the console:
+# print(loop_through(read_file_to_list(user_list)))
