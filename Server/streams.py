@@ -1,10 +1,8 @@
-# Server-side code to check if Twitch user is online.
-# List of users can be found in users.txt.
+# Volta Network Website - Server : streams.py
+# Code by Nick Pleatsikas (nickcp.com)
 
-# By Nick Pleatsikas - nickcp.com
-# For Volta Network - volta.network
-
-# Email admin@lvloneshow.com to report a bug.
+# Contact admin@lvloneshow.com to report any bugs.
+# View the README at lic.volta.network for information on usage rights.
 
 # Modules: ---------------------------------------------------------------------
 
