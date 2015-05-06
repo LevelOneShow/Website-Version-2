@@ -53,7 +53,9 @@ def online_status(user):
     if info.get("stream") == None:
         return None
     else:
-        return {"user": user, "title": info.get("stream").get("channel").get("status"), "url": info.get("stream").get("channel").get("url")}
+        return {"user": user, 
+        "title": info.get("stream").get("channel").get("status"), 
+        "url": info.get("stream").get("channel").get("url")}
 
 # Output: ----------------------------------------------------------------------
 
