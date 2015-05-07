@@ -20,9 +20,10 @@ $.ajax({
   dataType: "json",
   success: function(data) {
     toUserJSON(data);
-  }
+  },
   error: function() {
-    sendErrors();
+    // issue : sendErrors();
+    console.warn("Couldn\'t find file.")
   }
 });
 
@@ -31,14 +32,15 @@ $.ajax({
 // and writes it to variable 'userImages'.
 $.ajax({
   type: "GET",
-  url: "http://localhost/imageBase.json",
+  url: "http://localhost/imagesBase.json",
   dataType: "json",
   sucess: function(data) {
     // Sets the variable userImages to the data from the file.
     userImages = data;
-  }
+  },
   error: function() {
-    sendErrors();
+    // issue : sendErrors();
+    console.warn("Couldn\'t find file.")
   }
 })
 
@@ -65,7 +67,7 @@ function sendErrors() {
     userStepIn(false);
   } else if (sessionStorage.crashTimes === null) {
     return null;
-  } else if (parseInt(sessionStorage.crashTimes) =< 3) {
+  } else if (parseInt(sessionStorage.crashTimes) < 1) {
     userStepIn(false);
   } else {
     userStepIn(true);
@@ -79,21 +81,16 @@ function userStepIn(multiCrash) {
   // Confirm dialog box statements:
   var statement1 = "Whoops! Looks like something went wrong.\nPress \'OK\' to reload the page";
   var statement2 = "Looks like the issue isn't fixing itself.\nPress \'OK\' to email the developer" + 
-  "to let them know that there is something wrong";
+  " to let them know that there is something wrong.";
   
-  switch (multiCrash) {
-    case (true && confirm(statement2)):
-      location.href = "mailto:admin@lvloneshow.com";
-      break;
-    case (true && (!confirm(statement2))):
-      sessionStorage.setItem("crashTimes", null); // Sets the sesion key to 'null' to prevent further dialogs.
-      break;
-    case (false && confirm(statement1)):
-      location.reload();
-      break;
-    default:
-      console.warn("User chose to do nothing...");
-      break;
+  if (multiCrash && confirm(statement2)) {
+    location.href = "mailto:admin@lvloneshow.com";
+  } else if (multiCrash && !(confirm(statement2))) {
+    sessionStorage.setItem("crashTimes", null); // Sets the sesion key to 'null' to prevent further dialogs.
+  } else if (!(multiCrash) && confirm(statement1)) {
+    location.reload();
+  } else {
+    console.warn("User chose to do nothing.");
   }
 }
 
