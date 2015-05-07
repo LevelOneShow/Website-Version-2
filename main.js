@@ -9,9 +9,6 @@
 // Streamer Icons:
 var userImages = null; // This gets replaced on page load.
 
-// Local Storage Information:
-localStorage.setItem("crashTimes" , 0); // Tracks number of background crashes.
-
 // --- File Loading --- \\
 
 // onLoad -> JSON
@@ -25,7 +22,7 @@ $.ajax({
     toUserJSON(data);
   }
   error: function() {
-    checkErrors();
+    sendErrors();
   }
 });
 
@@ -41,7 +38,7 @@ $.ajax({
     userImages = data;
   }
   error: function() {
-    checkErrors();
+    sendErrors();
   }
 })
 
@@ -57,24 +54,18 @@ function toUserJSON(json) {
 }
 
 // -> href, null
-// Determines if the user wants to reload the page if there is an error. If the
-// error persists, then it asks the user if they want to report the error via email.
-function checkErrors() {
-  console.error("Something went wrong!"); //Reports to the console that something went wrong.
-  if ((localStorage.getItem("crashTimes")) < 3) {
-    if (confirm("Something went wrong. Would you like to reload the page?")) {
-      location.reload();
-    } else {
-      return null;
-    }
+// 
+function sendErrors() {
+  console.error("Something went wrong!"); // Reports to the console that something went wrong.
+  sessionStorage.crashTimes = (parseInt(sessionStorage.crashTimes) + 1); // Gets crashTimes var from localstorage.
+  
+  if (isNaN(sessionStorage.crashTimes)) {
+    sessionStorage.setItem("crashTimes", 0);
+    // something here.
+  } else if (parseInt(sessionStorage.crashTimes) =< 3) {
+    // something here.
   } else {
-    if (confirm("Some is really wrong! Would you like to email the creator of " + 
-      "the site with some more information?\nPaste this: Database failed to " + 
-      "load three times.")) {
-      location.href = "mailto:admin@lvloneshow.com";
-    } else {
-      return null;
-    }
+    // something here.
   }
 }
 
