@@ -4,6 +4,8 @@
 // Contact admin@lvloneshow.com to report any bugs.
 // View the README at lic.volta.network for information on usage rights.
 
+// --- Functions --- \\
+
 // -> [function call]
 // Detects the number of errors as set as a sessionStorage key and send either
 // 'true' or 'false' to the function userStepIn depending on the num of errors.
