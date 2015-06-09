@@ -1,3 +1,4 @@
+/// <reference path="typings/jquery/jquery.d.ts"/>
 // Volta Network Website - Homepage : main.js
 // Code by Nick Pleatsikas (nickcp.com)
 
@@ -62,11 +63,11 @@ function toUserJSON(json) {
 // corresposding stream.
 function createLinkedImage(json) {
   // JSON data from twitch:
-  url = json.url
-  name = json.user
-  streamTitle = json.title
+  var url = json.url
+  var name = json.user
+  var streamTitle = json.title
   // JSON image lookup:
-  image = userImages[name]
+  var image = userImages[name]
   // jQuery page appending:
   $("#streamers").append("<span class='streamer_image' title=" + streamTitle + 
   "><h2>" + name + "</h1><a href=" + url + "><img src=" + image + "></a></span>");
