@@ -16,4 +16,4 @@ If you wish to use this source code for this server, feel free too! This code is
 
 ## Issues:
 If you find an issues, bugs, incompatibilities, or just general feedback, email the site admin at
-nick@nickcp.com. Thanks!
+admin@volta.network. Thanks!
