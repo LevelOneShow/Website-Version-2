@@ -28,6 +28,7 @@ def read_file_to_list(file):
 
 # loop_through : list -> bool
 # Loops through a list and passes it to 'check_online' which returns a boolean.
+""" -> needs to be changed a lot.
 def loop_through(li):
     live_now = {}
     num_users = 1
@@ -35,6 +36,7 @@ def loop_through(li):
         live_now.update({num_users: online_status(item)})
         num_users = (num_users+1)
     return live_now
+"""
 
 # output_file : string, object -> file
 # Outputs an array to a file. Overwrites the file if it exists.
@@ -46,19 +48,31 @@ def output_file(file, o):
 
 # online_status : string -> object
 # Checks to see if twitch.tv user is online.
-def online_status(user):
+def process_raw_json(user):
     # Create URLs for GET Requests.
     twitch_url = "https://api.twitch.tv/kraken/streams/%s" % (user, )
     beam_url = "https://beam.pro/api/v1/channels/%s" % (user, )
     # Get JSON from twitch and beam.
-    info_twitch = (requests.get(url).json())
-    info_beam = (requests.get(url).json())
-    if twitch_info.get("stream") == None:
-        return None
-    else:
-        return {"user": user, 
-        "title": twitch_info.get("stream").get("channel").get("status"), 
-        "url": twitch_info.get("stream").get("channel").get("url")}
+    raw_json_twitch = (requests.get(twitch_url).json())
+    raw_json_beam = (requests.get(beam_url).json())
+
+    raw_json_array = [raw_json_twitch, raw_json_beam] 
+    # Main array:
+    info = []
+
+    for idx, item in enumerate(raw_json_array):
+        if (item.get("stream") == None or item.get("online") == False):
+            info.append(None)
+        elif idx % 2 == 0:
+            info.append({"user": user,
+                    "title": raw_json_beam.get("name"),
+                    "url": "https://beam.pro/ %s" % (user,)})
+        else:
+            info.append({"user": user, 
+                "title": raw_json_twitch.get("stream").get("channel").get("status"), 
+                "url": raw_json_twitch.get("stream").get("channel").get("url")})
+
+    return {"streamer": user, info}
 
 # Output: ----------------------------------------------------------------------
 
