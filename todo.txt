@@ -1,0 +1,10 @@
+Todo:
+
+- Finish Beam integration.
+- Add websockets server.
+- Add real-time push updates (possible webworker push updates in Chrome).
+- Add hitbox integration (depends on how their API matures).
+- Add key-based API requests (I don't plan on adding end-to-end encryuption right now).
+
+Wave 2:
+- Twitter bot as demonstration of API.

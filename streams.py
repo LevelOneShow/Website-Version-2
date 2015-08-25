@@ -38,30 +38,30 @@ def loop_through(li):
 
 # output_file : string, object -> file
 # Outputs an array to a file. Overwrites the file if it exists.
+""" -> function to be removed.
 def output_file(file, o):
     with open(file, "w") as output_file:
         json.dump(o, output_file)
+"""
 
 # online_status : string -> object
 # Checks to see if twitch.tv user is online.
 def online_status(user):
-    # Add in structure for future services like beam.
-    url = "https://api.twitch.tv/kraken/streams/" + user
-    info = (requests.get(url).json())
-    if info.get("stream") == None:
+    # Create URLs for GET Requests.
+    twitch_url = "https://api.twitch.tv/kraken/streams/%s" % (user, )
+    beam_url = "https://beam.pro/api/v1/channels/%s" % (user, )
+    # Get JSON from twitch and beam.
+    info_twitch = (requests.get(url).json())
+    info_beam = (requests.get(url).json())
+    if twitch_info.get("stream") == None:
         return None
     else:
         return {"user": user, 
-        "title": info.get("stream").get("channel").get("status"), 
-        "url": info.get("stream").get("channel").get("url")}
+        "title": twitch_info.get("stream").get("channel").get("status"), 
+        "url": twitch_info.get("stream").get("channel").get("url")}
 
 # Output: ----------------------------------------------------------------------
 
 # -> file
 # Outputs the twitch information for users to a file.
 output_file(output, loop_through(read_file_to_list(user_list)))
-
-# Debug: -----------------------------------------------------------------------
-
-# Print data output to the console:
-# print(loop_through(read_file_to_list(user_list)))

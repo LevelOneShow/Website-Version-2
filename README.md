@@ -1,7 +1,7 @@
-# Volta Network Streaming Backend - Licensing Information
+# Volta Network Streaming Backend - Licensing Information & Description:
 
-## Project Status & Code Use:
-This project is being restarted. More information to come in the next couple of weeks.
+## Project Status:
+The project is currently being restarted as of 8/24/15. For upcoming features, refer todo.txt.
 
 ## Commercial and Personal Source Code Usage License and Terms:
 If you wish to use this source code for this server, feel free too! This code is licensed under the CC Attribution-NonCommercial-ShareAlike 4.0 International. In essence, it means these things:
