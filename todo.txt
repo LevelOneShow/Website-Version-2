@@ -8,3 +8,6 @@ Todo:
 
 Wave 2:
 - Twitter bot as demonstration of API.
+
+Data Output:
+[{username: name, info: [twitch, beam]}, {username: name2, info: [twitch2, beam2]}, ...] 
