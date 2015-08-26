@@ -65,7 +65,7 @@ def process_raw_json(user):
             info.append(None)
         elif (item.get("stream") == None or item.get("online") == False):
             info.append(None)
-        elif idx == 2:
+        elif idx == 1:
             info.append({"title": raw_json_beam.get("name"),
                     "url": "https://beam.pro/%s" % (user,)})
         else:
