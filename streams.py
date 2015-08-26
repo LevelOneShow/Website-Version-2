@@ -66,12 +66,10 @@ def process_raw_json(user):
         elif (item.get("stream") == None or item.get("online") == False):
             info.append(None)
         elif idx == 2:
-            info.append({"user": user,
-                    "title": raw_json_beam.get("name"),
+            info.append({"title": raw_json_beam.get("name"),
                     "url": "https://beam.pro/%s" % (user,)})
         else:
-            info.append({"user": user, 
-                "title": raw_json_twitch.get("stream").get("channel").get("status"), 
+            info.append({"title": raw_json_twitch.get("stream").get("channel").get("status"), 
                 "url": raw_json_twitch.get("stream").get("channel").get("url")})
 
     return {"streamer": user, "info": info}
