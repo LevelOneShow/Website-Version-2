@@ -1,8 +1,8 @@
-# Volta Network Website - Server : streams.py
-# Code by Nick Pleatsikas (nickcp.com)
+# Volta Streaming Backend - Service Query
+# Written by Nick Pleatsikas - pleatsikas.me
 
-# Contact admin@lvloneshow.com to report any bugs.
-# View the README at lic.volta.network for information on usage rights.
+# Contact admin@volta.network to report any bugs.
+# View the README for more information.
 
 # Modules: ---------------------------------------------------------------------
 
@@ -74,10 +74,10 @@ def process_raw_json(user):
                 "title": raw_json_twitch.get("stream").get("channel").get("status"), 
                 "url": raw_json_twitch.get("stream").get("channel").get("url")})
 
-    return {"streamer": user, info}
+    return {"streamer": user, "info": info}
 
 # Output: ----------------------------------------------------------------------
 
 # -> file
 # Outputs the twitch information for users to a file.
-output_file(output, loop_through(read_file_to_list(user_list)))
+# output_file(output, loop_through(read_file_to_list(user_list))) <- commented out for debugging.
