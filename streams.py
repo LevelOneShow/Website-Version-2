@@ -61,7 +61,9 @@ def process_raw_json(user):
     info = []
 
     for idx, item in enumerate(raw_json_array):
-        if (item.get("stream") == None or item.get("online") == False):
+        if (item.get("statusCode") == 404 or item.get("status") == 404):
+            info.append(None)
+        elif (item.get("stream") == None or item.get("online") == False):
             info.append(None)
         elif idx % 2 == 0:
             info.append({"user": user,
