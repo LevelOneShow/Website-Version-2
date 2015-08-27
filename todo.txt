@@ -1,7 +1,6 @@
 Todo:
 
-- Finish Beam integration.
--- How does enumerate work.
+- Finish Beam integration (DONE)
 - Finish outside-layer json compiler.
 - Add websockets server.
 - Add real-time push updates (possible webworker push updates in Chrome).

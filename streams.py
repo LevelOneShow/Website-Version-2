@@ -1,4 +1,4 @@
-# Volta Streaming Backend - Service Query
+# Volta Streaming Backend - Streaming Service Query
 # Written by Nick Pleatsikas - pleatsikas.me
 
 # Contact admin@volta.network to report any bugs.
@@ -46,24 +46,28 @@ def output_file(file, o):
         json.dump(o, output_file)
 """
 
-# online_status : string -> object
-# Checks to see if twitch.tv user is online.
+# process_raw_json : string -> object
+# Checks to see if user is online on twitch or beam, then packages data in a 
+# pretty format.
 def process_raw_json(user):
-    # Create URLs for GET Requests.
+    # Create URLs for GET Requests:
     twitch_url = "https://api.twitch.tv/kraken/streams/%s" % (user, )
     beam_url = "https://beam.pro/api/v1/channels/%s" % (user, )
-    # Get JSON from twitch and beam.
+    # Get JSON from twitch and beam:
     raw_json_twitch = (requests.get(twitch_url).json())
     raw_json_beam = (requests.get(beam_url).json())
-
-    raw_json_array = [raw_json_twitch, raw_json_beam] 
+    raw_json_array = [raw_json_twitch, raw_json_beam]
     # Main array:
     info = []
-
+    # Sorting algorithm:
     for idx, item in enumerate(raw_json_array):
-        if (item.get("statusCode") == 404 or item.get("status") == 404):
+        if (item.get("statusCode") == 404 or
+                item.get("status") == 404 or
+                item.get("status") == 422):
             info.append(None)
-        elif (item.get("stream") == None or item.get("online") == False):
+        elif (item.get("online") == False): # Beam case for offline.
+            info.append(None)
+        elif (item.get("stream") == None and '_links' in item): # Twitch case for offline.
             info.append(None)
         elif idx == 1:
             info.append({"title": raw_json_beam.get("name"),
@@ -71,7 +75,7 @@ def process_raw_json(user):
         else:
             info.append({"title": raw_json_twitch.get("stream").get("channel").get("status"), 
                 "url": raw_json_twitch.get("stream").get("channel").get("url")})
-
+    
     return {"streamer": user, "info": info}
 
 # Output: ----------------------------------------------------------------------
