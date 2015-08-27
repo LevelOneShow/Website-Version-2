@@ -6,7 +6,7 @@
 
 # Modules: ---------------------------------------------------------------------
 
-# Full Modules:
+# Modules:
 import json, requests
 
 # Variables: -------------------------------------------------------------------
@@ -15,28 +15,25 @@ import json, requests
 user_list = 'users.txt'
 
 # Output File:
-output = 'output.json'
+# output = 'output.json' <- remove
 
 # Functions: -------------------------------------------------------------------
 
-# read_file_to_list : file -> list
+# file_to_list : file -> list
 # Reads a file with users and casts each username to a list.
-def read_file_to_list(file):
+def file_to_list(file):
     with open(file, 'r') as config:
         list_users = [line.strip() for line in config]
     return list_users
 
-# loop_through : list -> bool
-# Loops through a list and passes it to 'check_online' which returns a boolean.
-""" -> needs to be changed a lot.
-def loop_through(li):
-    live_now = {}
-    num_users = 1
-    for item in li:
-        live_now.update({num_users: online_status(item)})
-        num_users = (num_users+1)
-    return live_now
-"""
+# package_json : list -> bool
+# Loops through every user in list and passes it to process_raw_json for
+# generation.
+def package_json(lst):
+    pack = []
+    for user in lst:
+        pack.append(process_raw_json(user))
+    return json.dumps(pack)
 
 # output_file : string, object -> file
 # Outputs an array to a file. Overwrites the file if it exists.
@@ -78,8 +75,9 @@ def process_raw_json(user):
     
     return {"streamer": user, "info": info}
 
-# Output: ----------------------------------------------------------------------
-
-# -> file
-# Outputs the twitch information for users to a file.
-# output_file(output, loop_through(read_file_to_list(user_list))) <- commented out for debugging.
+# main : -> str
+# Main function. This runs the whole program.
+# This function is imported in other files with 'from streams import proc_main'
+def proc_main():
+    package_json(file_to_list(user_list))
+    # debug: print(package_json(file_to_list(user_list)))
