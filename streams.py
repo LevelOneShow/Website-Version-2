@@ -67,6 +67,7 @@ def process_raw_json(user):
 # main : -> str
 # Main function. This runs the whole program.
 # This function is imported in other files with 'from streams import proc_main'
+# or 'from streams import *'
 def proc_main():
     package_json(file_to_list(user_list))
     # debug: print(package_json(file_to_list(user_list)))
