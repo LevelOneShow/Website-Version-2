@@ -14,9 +14,6 @@ import json, requests
 # User List:
 user_list = 'users.txt'
 
-# Output File:
-# output = 'output.json' <- remove
-
 # Functions: -------------------------------------------------------------------
 
 # file_to_list : file -> list
@@ -34,14 +31,6 @@ def package_json(lst):
     for user in lst:
         pack.append(process_raw_json(user))
     return json.dumps(pack)
-
-# output_file : string, object -> file
-# Outputs an array to a file. Overwrites the file if it exists.
-""" -> function to be removed.
-def output_file(file, o):
-    with open(file, "w") as output_file:
-        json.dump(o, output_file)
-"""
 
 # process_raw_json : string -> object
 # Checks to see if user is online on twitch or beam, then packages data in a 
