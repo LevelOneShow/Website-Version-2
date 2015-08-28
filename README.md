@@ -1,5 +1,7 @@
 # Volta Network Streaming Backend - Licensing Information & Description:
 
+![Logo](http://i.imgur.com/FDQOtJr.png)
+
 ## Project Status:
 The project is currently being restarted as of 8/24/15. For upcoming features, refer todo.txt.
 
