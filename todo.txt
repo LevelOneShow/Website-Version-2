@@ -4,7 +4,7 @@ Todo:
 - Finish outside-layer json compiler (DONE).
 - Add websockets server.
 - Add real-time push updates (possible webworker push updates in Chrome).
-- Add hitbox integration (depends on how their API matures).
+- Add hitbox integration (DONE; some features missing).
 - Add YouTube Gaming integration (again, depends on the API)
 - Add key-based API requests (I don't plan on adding end-to-end encryuption right now).
 
