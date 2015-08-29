@@ -39,9 +39,11 @@ def process_raw_json(user):
     # Create URLs for GET Requests:
     twitch_url = "https://api.twitch.tv/kraken/streams/%s" % (user, )
     beam_url = "https://beam.pro/api/v1/channels/%s" % (user, )
+    hitbox_url = "https://hitbox.tv/media/live/%s" % (user, )
     # Get JSON from twitch and beam:
     raw_json_twitch = (requests.get(twitch_url).json())
     raw_json_beam = (requests.get(beam_url).json())
+    raw_json_hitbox = (requests.get(hitbox_url).json())
     raw_json_array = [raw_json_twitch, raw_json_beam]
     # Main array:
     info = []
@@ -49,15 +51,21 @@ def process_raw_json(user):
     for idx, item in enumerate(raw_json_array):
         if (item.get("statusCode") == 404 or
                 item.get("status") == 404 or
-                item.get("status") == 422):
+                item.get("status") == 422 or
+                item.get("error_msg") == "no_media_found"):
             info.append(None)
         elif (item.get("online") == False): # Beam case for offline.
             info.append(None)
         elif (item.get("stream") == None and '_links' in item): # Twitch case for offline.
             info.append(None)
+        elif (item.get("livestream")[0].get("channel").get("media_is_live") == '0'): # Hitbox case for offline.
+            info.append(None)
         elif idx == 1:
             info.append({"title": raw_json_beam.get("name"),
                     "url": "https://beam.pro/%s" % (user,)})
+        elif idx == 2 and raw_json_hitbox.get("livestream")[0].get("channel").get("media_is_live") == '1':
+            info.append({"title": None, # There is no method currently to get title of stream.
+                "url": "https://hitbox.tv/%s" % (user, )})
         else:
             info.append({"title": raw_json_twitch.get("stream").get("channel").get("status"), 
                 "url": raw_json_twitch.get("stream").get("channel").get("url")})
