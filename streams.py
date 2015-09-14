@@ -56,13 +56,15 @@ def process_raw_json(user):
         elif (item.get("stream") == None and '_links' in item): # Twitch case for offline.
             info.append(None)
         elif idx == 1:
-            info.append({"title": item.get("name"),
-                    "url": "https://beam.pro/%s" % (user,)})
+            info.append({"name": user,
+                "title": item.get("name"),
+                "url": "https://beam.pro/%s" % (user,)})
         else:
-            info.append({"title": item.get("stream").get("channel").get("status"), 
+            info.append({"name": user,
+                "title": item.get("stream").get("channel").get("status"), 
                 "url": item.get("stream").get("channel").get("url")})
     
-    return {"streamer": user, "info": info}
+    return info
 
 # main : -> str
 # Main function. This runs the whole program.

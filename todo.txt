@@ -2,7 +2,7 @@ Todo:
 
 - Finish Beam integration (DONE)
 - Finish outside-layer json compiler (DONE).
-- Add websockets server.
+- Tornado Server.
 - Add real-time push updates (possible webworker push updates in Chrome).
 - Add hitbox integration (DONE; some features missing).
 - Add YouTube Gaming integration (again, depends on the API)
@@ -13,4 +13,4 @@ Wave 2:
 - Multithread experiment.
 
 Data Output:
-[{username: name, info: [twitch, beam]}, {username: name2, info: [twitch2, beam2]}, ...] 
+[{"name": user, "title": title, "url": link}, ...] 
