@@ -1,21 +1,7 @@
-# Volta Network Streaming Backend - Licensing Information & Description:
+# Volta Network Streaming Backend vWebSockets - Licensing Information & Description:
 
 ![Logo](http://i.imgur.com/FDQOtJr.png)
 
-## Project Status:
-The project is currently being restarted as of 8/24/15. For upcoming features, refer todo.txt.
+This is a version of the streaming backend that uses a semi-functional websockets server and client. I don't plan on updateding this. I am just using this as a backup.
 
-## Commercial and Personal Source Code Usage License and Terms:
-If you wish to use this source code for this server, feel free too! This code is licensed under the CC Attribution-NonCommercial-ShareAlike 4.0 International. In essence, it means these things:
-
-- You are free to use and adapt the source for **non-commercial** projects.
-- You must give proper credit to all contributors in this document.
-- If changes have been made to the code, you must indicate that changes have been made.
-- If you distribute code or software based on the code in this repo, it must be listed under the same license
-
-## Contributors:
-- Nick Pleatsikas (pleatsikas.me) : Software Engineer
-
-## Issues:
-If you find an issues, bugs, incompatibilities, or just general feedback, email the site admin at
-admin@volta.network. Thanks!
+For licensing information, refer to [the README](https://github.com/VoltaNetwork/Volta-Streaming-Server/blob/master/README.md) on the master branch.

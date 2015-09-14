@@ -15,18 +15,18 @@ var userImages = null; // This gets replaced on page load.
 // onLoad -> JSON
 // On page load, it reads JSON data from specific file as passes it to
 // toUserJSON.
-$.ajax({
-  type: "GET",
-  url: "http://localhost/Server/output.json",
-  dataType: "json",
-  success: function(data) {
-    toUserJSON(data);
-  },
-  error: function() {
+// $.ajax({
+//  type: "GET",
+//  url: "http://localhost/Server/output.json",
+//  dataType: "json",
+//  success: function(data) {
+//    toUserJSON(data);
+//  },
+//   error: function() {
     // issue : sendErrors();
-    console.warn("Couldn\'t find file.")
-  }
-});
+//   console.warn("Couldn\'t find file.")
+//  }
+// });
 
 // onLoad -> JSON
 // On page load, read JSON data for image locations from specified file
@@ -43,7 +43,7 @@ $.ajax({
     // issue : sendErrors();
     console.warn("Couldn\'t find file.")
   }
-})
+});
 
 // --- Functions --- \\
 
@@ -72,3 +72,12 @@ function createLinkedImage(json) {
   $("#streamers").append("<span class='streamer_image' title=" + streamTitle + 
   "><h2>" + name + "</h1><a href=" + url + "><img src=" + image + "></a></span>");
 }
+
+
+// Websockets stuff:
+var ws = new WebSocket("ws://pacific.pleatsikas.me:9999/");
+ws.onopen = function() {
+  ws.send("Hello Mr. Server!");
+};
+ws.onmessage = function (e) { alert(e.data); };
+ws.onclose = function() { };
