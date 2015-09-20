@@ -14,6 +14,15 @@ import json, requests
 # User List:
 user_list = 'users.txt'
 
+# Output File:
+out_file = 'api_data.txt'
+
+# Output Directory:
+dirs = 'html/'
+
+# Output Path:
+path = dirs + out_file
+
 # Functions: -------------------------------------------------------------------
 
 # file_to_list : file -> list
@@ -21,7 +30,15 @@ user_list = 'users.txt'
 def file_to_list(file):
     with open(file, 'r') as config:
         list_users = [line.strip() for line in config]
+        config.close()
     return list_users
+
+# write_to_file : list -> file
+# An array and write it to a file.
+def write_to_file(lst, file):
+    f = open(file, 'r+')
+    f.write(str(lst))
+    f.close()
 
 # package_json : list -> bool
 # Loops through every user in list and passes it to process_raw_json for
@@ -30,7 +47,7 @@ def package_json(lst):
     pack = []
     for user in lst:
         pack.append(process_raw_json(user))
-    return json.dumps(pack)
+    return pack
 
 # process_raw_json : string -> object
 # Checks to see if user is online on twitch or beam, then packages data in a 
@@ -66,10 +83,11 @@ def process_raw_json(user):
     
     return info
 
-# main : -> str
+# main : -> file
 # Main function. This runs the whole program.
 # This function is imported in other files with 'from streams import proc_main'
 # or 'from streams import *'
-def proc_main():
-    package_json(file_to_list(user_list))
+if __name__ == '__main__':
+    data_pack = package_json(file_to_list(user_list))
+    write_to_file(data_pack, path)
     # debug: print(package_json(file_to_list(user_list)))
