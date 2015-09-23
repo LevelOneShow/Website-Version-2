@@ -8,6 +8,7 @@
 
 # Full Modules:
 import tornado.httpclient
+import json
 
 # Partial Modules:
 from tornado import gen
@@ -21,6 +22,12 @@ port = 8001
 
 # Functions:  ------------------------------------------------------------------
 
+# prettify_online : List -> DOM Element.
+# ...
+def prettify_online(ary):
+    return ary
+template.execute(prettify_online=prettify_online) # Add to template.
+
 # Handles all requests to homepage.
 class HomepageHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
@@ -28,6 +35,8 @@ class HomepageHandler(tornado.web.RequestHandler):
         http = tornado.httpclient.AsyncHTTPClient()
         response = yield http.fetch("http://localhost/test.txt")
         self.write(response.body)
+        # self.render("home.template.html", online_streamers_raw=response.body) <- Unlock when 
+        #                                                                          sample page completed.
 
 # App Generation: --------------------------------------------------------------
 
