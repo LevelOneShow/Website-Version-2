@@ -6,7 +6,7 @@
 
 # Modules: ---------------------------------------------------------------------
 
-# Modules:
+# Full Modules:
 import json, requests
 
 # Variables: -------------------------------------------------------------------
@@ -83,10 +83,10 @@ def process_raw_json(user):
     
     return info
 
-# main : -> file
-# Main function. This runs the whole program.
-# This function is imported in other files with 'from streams import proc_main'
-# or 'from streams import *'
+
+# Startup: ---------------------------------------------------------------------
+
+# Init:
 if __name__ == '__main__':
     data_pack = package_json(file_to_list(user_list))
     write_to_file(data_pack, path)
