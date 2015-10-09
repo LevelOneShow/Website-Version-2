@@ -28,22 +28,29 @@ def prettify_online(ary):
     return ary
 template.execute(prettify_online=prettify_online) # Add to template.
 
-# Handles all requests to homepage.
+# Generates the homepage with active streamers.
 class HomepageHandler(tornado.web.RequestHandler):
     @tornado.gen.coroutine
     def get(self):
         http = tornado.httpclient.AsyncHTTPClient()
         response = yield http.fetch("http://localhost/test.txt")
         self.write(response.body)
-        # self.render("home.template.html", online_streamers_raw=response.body) <- Unlock when 
+        # self.render("home.template.html", streams=response.body) <- Unlock when 
         #                                                                          sample page completed.
+
+# Handles requests to the streamer API.
+class APIHanlder(tornado.web.RequestHandler):
+    def get(self):
+        self.write("Data coming soon...")
 
 # App Generation: --------------------------------------------------------------
 
 # App Routes & Settings:
 def make_app():
     return Application([
-        (r"/", HomepageHandler)
+        (r"/", HomepageHandler), # Homepage
+        (r"/api", APIHandler), # API
+        (r"/api/enroll", tornado.web.RedirectHandler, dict(url=r"/")), # Enroll API Keys
     ])
 
 # Startup: ---------------------------------------------------------------------
