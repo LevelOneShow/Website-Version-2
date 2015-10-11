@@ -18,10 +18,10 @@ user_list = 'users.txt'
 out_file = 'api_data.txt'
 
 # Output Directory:
-dirs = 'html/'
+dir = 'html2/'
 
 # Output Path:
-path = dirs + out_file
+path = dir + out_file
 
 # Functions: -------------------------------------------------------------------
 
@@ -90,4 +90,4 @@ def process_raw_json(user):
 if __name__ == '__main__':
     data_pack = package_json(file_to_list(user_list))
     write_to_file(data_pack, path)
-    # debug: print(package_json(file_to_list(user_list)))
+    # debug: print(data_pack)
