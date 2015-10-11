@@ -1,17 +1,31 @@
 Todo:
 
+Wave 1:
 - Finish Beam integration (DONE)
 - Finish outside-layer json compiler (DONE).
 - Tornado Server (DONE).
 - Add hitbox integration (DONE; some features missing).
-- Add key-based API requests (I don't plan on adding end-to-end encryuption right now).
+- Finish API server.
 
 Wave 2:
-- Twitter bot as demonstration of API.
-- Multithread experiment.
-- Add real-time push updates (possible webworker push updates in Chrome).
-- Add YouTube Gaming integration (again, depends on the API).
+- Add the ability to enroll keys for API. Keys will become mandatory after this point.
 - Rewrite streams.py to be asynchronous.
+- Twitter bot as demonstration of API.
+- Add real-time push updates (possible webworker push updates in Chrome).
+- Multithread experiment.
+- Add YouTube Gaming integration (again, depends on the API).
 
-Data Output:
-[{"name": user, "title": title, "url": link}, {"name": user, "title": title, "url": link}, ...] 
+Sample Data Output:
+[{"name": user, "title": title, "url": link}, {"name": user, "title": title, "url": link}, ...]
+
+Server File Structure:
+../main.py 
+../streams.py
+../html/home.template.html
+../html2/index.html 	|
+../html2/api_data.txt	| <- so that I can serve data to API until integrated into Tornado.
+
+Website Structure:
+/ <- Homepage (home.template.html)
+/api <- API requests
+/api/enroll <- Enroll new keys for API (currently there is no system for this so it redirects to /).
