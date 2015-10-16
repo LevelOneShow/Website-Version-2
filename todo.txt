@@ -6,6 +6,7 @@ Wave 1:
 - Tornado Server (DONE).
 - Add hitbox integration (DONE; some features missing).
 - Finish API server.
+- Finish DOM Generation.
 
 Wave 2:
 - Add the ability to enroll keys for API. Keys will become mandatory after this point.

@@ -46,7 +46,7 @@ def write_to_file(lst, file):
 def package_json(lst):
     pack = []
     for user in lst:
-        pack.append(process_raw_json(user))
+        pack.extend(process_raw_json(user))
     return pack
 
 # process_raw_json : string -> object
