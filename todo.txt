@@ -5,7 +5,7 @@ Wave 1:
 - Finish outside-layer json compiler (DONE).
 - Tornado Server (DONE).
 - Add hitbox integration (DONE; some features missing).
-- Finish API server.
+- Finish API server (DONE).
 - Finish DOM Generation.
 
 Wave 2:
