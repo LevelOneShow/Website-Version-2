@@ -18,7 +18,7 @@ user_list = 'users.txt'
 out_file = 'api_data.txt'
 
 # Output Directory:
-dir = 'html2/'
+dir = '/home/web/html2/'
 
 # Output Path:
 path = dir + out_file
