@@ -44,9 +44,7 @@ template.execute(prettify_streaming=prettify_streaming)
 # /: Generates the homepage with active streamers.
 class HomepageHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write(query_data())
-        # self.render("home.template.html", streams=query_data()) <- Unlock when 
-        #                                                            sample page completed.
+        self.render("/html/home.template.html", streams=query_data())
 
 # /api: Handles requests to the streamer API.
 class APIHanlder(tornado.web.RequestHandler):
