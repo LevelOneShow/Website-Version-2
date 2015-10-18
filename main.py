@@ -29,11 +29,15 @@ def query_data():
     response = yield http.fetch("http://localhost:9000/api_data.txt")
     return response.body
 
-# prettify_streaming : List -> DOM Element
-# Takes streamer data and turns it into readable DOM elements.
+# prettify_streaming : List -> String
+# Takes streamer data and turns it into a string readable by the browser.
 def prettify_streaming(ary):
-    return ary
-template.execute(prettify_online=prettify_online) # Add to template.
+    for item in ary:
+        title = item.get("title")
+        url = item.get("url")
+        return "<a href=%s>%s</a>" % (url, title, )
+# Gives HTML templates access to this function.
+template.execute(prettify_streaming=prettify_streaming)
 
 # Pages: -----------------------------------------------------------------------
 
