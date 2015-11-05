@@ -29,27 +29,35 @@ def query_data():
     response = yield http.fetch("http://localhost:9000/api_data.txt")
     return response.body
 
-# prettify_streaming : List -> String
+# insert_to_DOM : List -> String
 # Takes streamer data and turns it into a string readable by the browser.
-def prettify_streaming(ary):
+def insert_to_DOM(ary, service):
     for item in ary:
-        title = item.get("title")
-        url = item.get("url")
-        return "<a href=%s>%s</a>" % (url, title, )
+        if item.get('service') == service:
+            title = item.get("title")
+            url = item.get("url")
+            return "<a href=%s>%s</a>" % (url, title, )
+        else:
+            continue
 # Gives HTML templates access to this function.
-template.execute(prettify_streaming=prettify_streaming)
+template.execute(insert_to_DOM=insert_to_DOM)
 
 # Pages: -----------------------------------------------------------------------
 
 # /: Generates the homepage with active streamers.
 class HomepageHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("/html/home.template.html", streams=query_data())
+        self.render("/html/home.template.html", stream_data=query_data())
 
 # /api: Handles requests to the streamer API.
 class APIHanlder(tornado.web.RequestHandler):
     def get(self):
         self.write(query_data())
+        
+# /api/enroll: Handles request for adding new API keys. Stub page.
+class EnrollKeys(tornado.web.RequestHandler):
+    def get(self):
+        self.write("<h1>Enrolling Keys Coming Soon</h1>")
 
 # App Generation: --------------------------------------------------------------
 
@@ -58,7 +66,7 @@ def make_app():
     return Application([
         (r"/", HomepageHandler), # Homepage
         (r"/api", APIHandler), # API
-        (r"/api/enroll", tornado.web.RedirectHandler, dict(url=r"/")), # Enroll new API Keys
+        (r"/api/enroll", EnrollKeys) # Enroll new API Keys
     ])
 
 # Startup: ---------------------------------------------------------------------
