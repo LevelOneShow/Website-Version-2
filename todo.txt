@@ -17,7 +17,16 @@ Wave 2:
 - Add YouTube Gaming integration (again, depends on the API).
 
 Sample Data Output:
-[{"name": user, "title": title, "url": link}, {"name": user, "title": title, "url": link}, ...]
+[{"name": user,
+  "online": boolean,
+  "service": service_name,
+  "data": {"title": stream_name, "url": url}},
+ {"name": user,
+  "online": boolean,
+  "service": service_name,
+  "data": {"title": stream_name, "url": url}},
+  ...
+]
 
 Server File Structure:
 ../main.py 

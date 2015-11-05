@@ -69,17 +69,31 @@ def process_raw_json(user):
                 item.get("status") == 422):
             info.append(None)
         elif (item.get("online") == False): # Beam case for offline.
-            info.append(None)
+            info.append({"name": user,
+                "online": False,
+                "service": "beam",
+                "data": None})
         elif (item.get("stream") == None and '_links' in item): # Twitch case for offline.
-            info.append(None)
+            info.append({"name": user,
+                "online": False,
+                "service": "twitch",
+                "data": None})
         elif idx == 1:
             info.append({"name": user,
-                "title": item.get("name"),
-                "url": "https://beam.pro/%s" % (user,)})
+                "online": True,
+                "service": "beam",
+                "data": {
+                    "title": item.get("name"),
+                    "url": "https://beam.pro/%s" % (user,)
+                }})
         else:
             info.append({"name": user,
-                "title": item.get("stream").get("channel").get("status"), 
-                "url": item.get("stream").get("channel").get("url")})
+                "online": True,
+                "service": "twitch",
+                "data": {
+                    "title": item.get("stream").get("channel").get("status"), 
+                    "url": item.get("stream").get("channel").get("url")
+                }})
     
     return info
 
