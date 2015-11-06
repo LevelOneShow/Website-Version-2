@@ -37,7 +37,7 @@ def file_to_list(file):
 # An array and write it to a file.
 def write_to_file(lst, file):
     f = open(file, 'r+')
-    f.write(str(lst))
+    f.write('\'%s\'' % (str(lst), ))
     f.close()
 
 # package_json : list -> bool
@@ -47,7 +47,7 @@ def package_json(lst):
     pack = []
     for user in lst:
         pack.extend(process_raw_json(user))
-    return pack
+    return json.dumps(pack, sort_keys=True)
 
 # process_raw_json : string -> object
 # Checks to see if user is online on twitch or beam, then packages data in a 

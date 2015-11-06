@@ -8,6 +8,7 @@
 
 # Full Modules:
 import tornado.httpclient
+import json
 
 # Partial Modules:
 from tornado import gen
@@ -27,7 +28,7 @@ port = 8001
 def query_data():
     http = tornado.httpclient.AsyncHTTPClient()
     response = yield http.fetch("http://localhost:9000/api_data.txt")
-    return response.body
+    return json.loads(response.body)
 
 # insert_to_DOM : List -> String
 # Takes streamer data and turns it into a string readable by the browser.
