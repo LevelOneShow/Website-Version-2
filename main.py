@@ -28,27 +28,31 @@ port = 8001
 def query_data():
     http = tornado.httpclient.AsyncHTTPClient()
     response = yield http.fetch("http://localhost:9000/api_data.txt")
-    return json.loads(response.body)
+    return response.body
 
 # insert_to_DOM : List -> String
 # Takes streamer data and turns it into a string readable by the browser.
 def insert_to_DOM(ary, service):
     for item in ary:
+       if item == None:
+            continue
         if item.get('service') == service:
-            title = item.get("title")
-            url = item.get("url")
-            return "<a href=%s>%s</a>" % (url, title, )
+            if item.get("data") == None:
+                continue
+            else:
+                title = item.get("data").get("title")
+                url = item.get("data").get("url")
+                return r"<a href=%s>%s</a>" % (url, title, )
         else:
             continue
-# Gives HTML templates access to this function.
-template.execute(insert_to_DOM=insert_to_DOM)
 
 # Pages: -----------------------------------------------------------------------
 
 # /: Generates the homepage with active streamers.
 class HomepageHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("/html/home.template.html", stream_data=query_data())
+        stream_data = json.loads(query_data())
+        self.render("html/home.template.html", stream_data=stream_data, insert_to_DOM=insert_to_DOM)
 
 # /api: Handles requests to the streamer API.
 class APIHanlder(tornado.web.RequestHandler):
