@@ -33,10 +33,17 @@ def file_to_list(file):
         config.close()
     return list_users
 
+# delete_contents : file -> file
+# Deletes the contents of a file.
+def delete_contents(fname):
+    fname.seek(0)
+    fname.truncate()
+
 # write_to_file : list -> file
 # An array and write it to a file.
 def write_to_file(lst, file):
     f = open(file, 'r+')
+    delete_contents(f) # Delete contents for overwrite.
     f.write('\'%s\'' % (str(lst), ))
     f.close()
 
