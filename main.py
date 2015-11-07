@@ -55,7 +55,7 @@ class HomepageHandler(tornado.web.RequestHandler):
         self.render("html/home.template.html", stream_data=stream_data, insert_to_DOM=insert_to_DOM)
 
 # /api: Handles requests to the streamer API.
-class APIHanlder(tornado.web.RequestHandler):
+class APIHandler(tornado.web.RequestHandler):
     def get(self):
         self.write(query_data())
         
