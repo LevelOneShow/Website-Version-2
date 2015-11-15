@@ -44,7 +44,7 @@ def delete_contents(fname):
 def write_to_file(lst, file):
     f = open(file, 'r+')
     delete_contents(f) # Delete contents for overwrite.
-    f.write('\'%s\'' % (str(lst), ))
+    f.write(str(lst))
     f.close()
 
 # package_json : list -> bool
@@ -65,13 +65,18 @@ def process_raw_json(user):
     beam_url = "https://beam.pro/api/v1/channels/%s" % (user, )
     # Get JSON from twitch and beam:
     raw_json_twitch = (requests.get(twitch_url).json())
-    raw_json_beam = (requests.get(beam_url).json())
+    if requests.get(beam_url).status_code == 404:
+        raw_json_beam = None
+    else:
+        raw_json_beam = (requests.get(beam_url).json())
     raw_json_array = [raw_json_twitch, raw_json_beam]
     # Main array:
     info = []
     # Sorting algorithm:
     for idx, item in enumerate(raw_json_array):
-        if (item.get("statusCode") == 404 or
+        if item == None:
+            info.append(None)
+        elif (item.get("statusCode") == 404 or
                 item.get("status") == 404 or
                 item.get("status") == 422):
             info.append(None)
