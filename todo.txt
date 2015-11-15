@@ -6,11 +6,14 @@ Wave 1:
 - Tornado Server (DONE).
 - Add hitbox integration (DONE; some features missing).
 - Finish API server (DONE).
-- Finish DOM Generation.
+- Finish DOM Generation (DONE).
 
 Wave 2:
 - Add the ability to enroll keys for API. Keys will become mandatory after this point.
 - Rewrite streams.py to be asynchronous.
+- Add database to store api data.
+
+Wave 3:
 - Twitter bot as demonstration of API.
 - Add real-time push updates (possible webworker push updates in Chrome).
 - Multithread experiment.

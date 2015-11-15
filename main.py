@@ -24,35 +24,42 @@ port = 8001
 
 # query_data : GET -> String
 # Asychronously reads text file on localhost:9000 and outputs the response.
+"""
 @tornado.gen.coroutine
 def query_data():
     http = tornado.httpclient.AsyncHTTPClient()
     response = yield http.fetch("http://localhost:9000/api_data.txt")
     return response.body
+"""
 
-# insert_to_DOM : List -> String
-# Takes streamer data and turns it into a string readable by the browser.
-def insert_to_DOM(ary, service):
+# element_generator : List -> String
+# Takes an array with twitch/beam data and turns it into a string readable by 
+# the browser.
+def element_generator(ary, service):
     for item in ary:
        if item == None:
             continue
-        if item.get('service') == service:
-            if item.get("data") == None:
-                continue
-            else:
-                title = item.get("data").get("title")
-                url = item.get("data").get("url")
-                return r"<a href=%s>%s</a>" % (url, title, )
-        else:
+       if item.get('service') == service and item.get("online") != False:
+            title = item.get("data").get("title")
+            url = item.get("data").get("url")
+            yield "<a href=%s>%s</a>" % (url, title, )
+       else:
             continue
 
 # Pages: -----------------------------------------------------------------------
 
 # /: Generates the homepage with active streamers.
 class HomepageHandler(tornado.web.RequestHandler):
+    @tornado.gen.coroutine
     def get(self):
-        stream_data = json.loads(query_data())
-        self.render("html/home.template.html", stream_data=stream_data, insert_to_DOM=insert_to_DOM)
+        http = tornado.httpclient.AsyncHTTPClient()
+        response = yield http.fetch("http://localhost:9000/api_data.txt")
+        data_pack = tornado.escape.json_decode(response.body.decode('utf-8'))
+        twitch_data = element_generator(data_pack, "twitch"))
+        beam_data = element_generator(data_pack, "beam"))
+        self.render("html/home.template.html", 
+            twitch_data=twitch_data,
+            beam_data=beam_data)
 
 # /api: Handles requests to the streamer API.
 class APIHandler(tornado.web.RequestHandler):
