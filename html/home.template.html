@@ -1,7 +1,7 @@
+{% autoescape None %}
 <html>
 	<head>
-		<title>Home Test Page</html>
-		{% autoescape None %}
+		<title>Home Test Page</title>
 		<!--
                  __   __   _ _        
                  \ \ / /__| | |_ __ _ 
@@ -12,9 +12,17 @@
 	</head>
 	<body>
 		<h1>Twitch</h1>
-		<li>{{ insert_to_DOM(stream_data, "twitch") }}</li>
+			<ul>
+				{% for item in twitch_data %}
+					<li>{{ item }}</li>
+				{% end %}
+			</ul>
 		<h1>Beam</h1>
-		<li>{{ insert_to_DOM(stream_data, "beam") }}</li>
+			<ul>
+				{% for item in beam_data %}
+					<li>{{ item }}</li>
+				{% end %}
+			</ul>
 		<img src="http://i.imgur.com/FDQOtJr.png" height=60px>
 	</body>
 	<style>
