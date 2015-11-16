@@ -1,0 +1,12 @@
+Changelog:
+
+v1.0.1:
+- Added settings dictionary for global configuration. Includes global autoescaping
+and custom 404 page handler.
+- Made /api page functional again by adding in own coroutine for getting json from
+remote server.
+- Added DefaultHandler for creating custom 404 pages.
+- Added 'import tornado' to fix broken methods due to 'tornado' not being defined.
+- Changed 'import tornado.httpclient' to 'from tornado.httpclient import AsyncHTTPClient'
+to reduce number of functions, methods, etc. that need to be imported.
+- Removed 'import json'. Switched to tornado JSON libraries.
