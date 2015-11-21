@@ -78,6 +78,7 @@ class DefaultHandler(tornado.web.RequestHandler):
 settings = {
     "autoescape": None,
     "default_handler_class": DefaultHandler,
+    "static_path": os.path.join(os.path.dirname(__file__), "static")
 }
 
 # App Routes & Settings:
