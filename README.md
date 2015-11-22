@@ -19,7 +19,7 @@ In essence, it means these things:
 - If you distribute code or software based on the code in this repo, it must be listed under the same license
 
 ## Contributors:
-- Nick Pleatsikas (pleatsikas.me) : Software Engineer
+- [Nick Pleatsikas](pleatsikas.me) : Software Engineer
 
 ## Issues:
 If you find an issues, bugs, incompatibilities, or just general feedback, email the site admin at
