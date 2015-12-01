@@ -24,3 +24,5 @@ In essence, it means these things:
 ## Issues:
 If you find an issues, bugs, incompatibilities, or just general feedback, email the site admin at
 admin@volta.network. Thanks!
+
+[![forthebadge](http://forthebadge.com/images/badges/built-by-developers.svg)](http://forthebadge.com)
