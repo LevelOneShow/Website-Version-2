@@ -2,6 +2,8 @@
 
 ![Logo](http://i.imgur.com/FDQOtJr.png)
 
+![Shields](https://img.shields.io/badge/python-3.4-blue.svg)
+
 ## Project Information:
 This is a prototype livestreaming aggregator service for [twitch.tv](https://twitch.tv) and [beam.pro](https://beam.pro).
 It uses [Tornado](http://tornadoweb.org) for the server-assisted client-side webpage rendering. The logic for the data curation is all
