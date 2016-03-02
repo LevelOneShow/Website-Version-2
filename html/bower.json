@@ -1,0 +1,23 @@
+{
+  "name": "Project Alloy",
+  "version": "1.0.1",
+  "authors": [
+    "MrFlynn <nicholaspleatsikas@gmail.com>"
+  ],
+  "description": "Template pages for project alloy",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "milligram": "1.1.0"
+  },
+  "homepage": "https://github.com/VoltaNetwork/Project-Alloy",
+  "main": "",
+  "moduleType": [],
+  "private": true
+}
